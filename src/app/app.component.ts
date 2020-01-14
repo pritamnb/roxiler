@@ -9,6 +9,7 @@ export class AppComponent implements OnInit {
   userDetails: any;
   selectedUserDetails: any;
   userSuggetions = [];
+  suggetions: any;
   suggetionsArray = [];
   selectedUser = [
     {
@@ -50,10 +51,13 @@ export class AppComponent implements OnInit {
     { id: 12, name: 'Jit', age: 29, city: 'Vadodara', mark: 72, suggestions: [4, 5, 7] },
   ];
   constructor(private mainService: MainService) {
+    // setting up users data
     this.mainService.setAllEmployees(this.dataObject);
+    // getting all users data
     this.mainService._allUserDetails.subscribe((users) => {
       this.userDetails = users;
     });
+    // selected user
     this.mainService._selectedUserDetails.subscribe((user) => {
       console.log('subscribed Selected User', user);
       this.selectedUserDetails = user;
@@ -69,11 +73,17 @@ export class AppComponent implements OnInit {
         );
       }
     });
+    // getting suggested users data
+    this.mainService._allSuggetions.subscribe((sugg) => {
+      this.suggetions = sugg;
+    });
   }
 
   ngOnInit() {
   }
   onSelectUser(i) {
+    this.userSuggetions = [];
+    this.suggetionsArray = [];
     let suggLen;
     console.log('selected user ID', i);
     this.dataObject.map(user => {
@@ -93,14 +103,17 @@ export class AppComponent implements OnInit {
 
   }
   searchUser(id) {
-
     this.userDetails.map((user) => {
       if (user.id === id) {
         this.userSuggetions.push(user);
+        console.log(user);
       }
 
     });
-    console.log('userSuggetions', this.userSuggetions);
+    // console.log('userSuggetions', this.userSuggetions);
+    this.mainService.setSuggetions(this.userSuggetions);
   }
+
+
 
 }

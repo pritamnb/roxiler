@@ -36,12 +36,12 @@
           </tr>
           <br>
           <span>Suggetions :</span>
-          <tr *ngFor="let user of selectedUser">
+          <tr *ngFor="let user of suggetions" (click)="onSelectUser(user.id)">
             <td>
-              Name
+              {{user.name}}
             </td>
             <td>
-              Age
+              {{user.age}}
             </td>
           </tr>
         </table>
