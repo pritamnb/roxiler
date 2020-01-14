@@ -2,17 +2,13 @@
   margin: 0;
   width: 100%;
   // height: 96vh;
-  border: 1px solid;
   .container {
     width: 100%;
     height: 100%;
-    // padding: 20px;
-    border: 1px solid;
     display: flex;
     .left-container {
       width: 50%;
       height: 100%;
-      border: 1px solid;
       padding: 20px;
 
       .users {
@@ -43,8 +39,31 @@
     .right-container {
       width: 50%;
       height: 100%;
-      border: 1px solid;
+      padding: 20px;
       .user-details {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td,
+        th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+          width: 50%;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
       }
     }
   }

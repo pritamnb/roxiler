@@ -22,26 +22,32 @@
       </div>
     </div>
     <div class="right-container">
-      <div class="user-details"></div>
-      <table>
-        <tr *ngFor="let user of selectedUser">
-          <td>
-            {{user.label}}
-          </td>
-          <td>
-            {{user.value}}
-          </td>
-        </tr>
-        <span>Suggetions :</span>
-        <tr *ngFor="let user of selectedUser">
-          <td>
-            Name
-          </td>
-          <td>
-            Age
-          </td>
-        </tr>
-      </table>
+      <div class="user-details">
+        <table>
+          <h2>Selected User Details</h2>
+
+          <tr *ngFor="let user of selectedUser">
+            <td>
+              {{user.label}}
+            </td>
+            <td>
+              {{user.value}}
+            </td>
+          </tr>
+          <br>
+          <span>Suggetions :</span>
+          <tr *ngFor="let user of selectedUser">
+            <td>
+              Name
+            </td>
+            <td>
+              Age
+            </td>
+          </tr>
+        </table>
+
+      </div>
+
     </div>
   </div>
 </div>

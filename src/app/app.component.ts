@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { MainService } from './services/main.service';
-import { timingSafeEqual } from 'crypto';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,6 +9,7 @@ export class AppComponent implements OnInit {
   userDetails: any;
   selectedUserDetails: any;
   userSuggetions: any;
+  suggetionsArray: any;
   selectedUser = [
     {
       key: 'name',
@@ -30,7 +29,7 @@ export class AppComponent implements OnInit {
 
     },
     {
-      key: 'marks',
+      key: 'mark',
       label: 'Marks',
       value: ''
     }
@@ -53,8 +52,22 @@ export class AppComponent implements OnInit {
   constructor(private mainService: MainService) {
     this.mainService.setAllEmployees(this.dataObject);
     this.mainService._allUserDetails.subscribe((users) => {
-      console.log(users);
       this.userDetails = users;
+    });
+    this.mainService._selectedUserDetails.subscribe((user) => {
+      console.log('subscribed Selected User', user);
+      this.selectedUserDetails = user;
+
+      // tslint:disable-next-line: forin
+      for (const iterator in this.selectedUserDetails) {
+        this.selectedUser.map(
+          (ele) => {
+            if (ele.key === iterator) {
+              ele.value = this.selectedUserDetails[iterator];
+            }
+          }
+        );
+      }
     });
   }
 
@@ -64,12 +77,9 @@ export class AppComponent implements OnInit {
     console.log('selected user ID', i);
     this.dataObject.map(user => {
       if (user.id === i) {
-        console.log(user.suggestions);
+        console.log(user);
+        this.mainService.setUserDetails(user);
         this.userSuggetions = user.suggestions;
-        this.userSuggetions.map(res => {
-          console.log('user suggetions', res);
-
-        });
       }
     });
 
