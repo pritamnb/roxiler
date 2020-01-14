@@ -9,7 +9,7 @@ export class AppComponent implements OnInit {
   userDetails: any;
   selectedUserDetails: any;
   userSuggetions: any;
-  suggetionsArray: any;
+  suggetionsArray = [];
   selectedUser = [
     {
       key: 'name',
@@ -79,7 +79,9 @@ export class AppComponent implements OnInit {
       if (user.id === i) {
         console.log(user);
         this.mainService.setUserDetails(user);
-        this.userSuggetions = user.suggestions;
+        // this.userSuggetions = user.suggestions;
+        this.suggetionsArray.push(user.suggestions);
+        console.log(this.suggetionsArray[0]);
       }
     });
 
