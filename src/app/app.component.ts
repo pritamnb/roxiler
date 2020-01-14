@@ -87,8 +87,8 @@ export class AppComponent implements OnInit {
       }
     });
     // tslint:disable-next-line: prefer-for-of
-    for (let i=0;i< suggLen;i++){
-      // this.searchUser(this.suggetionsArray[0]);
+    for (let i = 0; i < suggLen; i++) {
+      this.searchUser(this.suggetionsArray[0][i]);
     }
 
   }
