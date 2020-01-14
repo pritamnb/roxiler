@@ -8,7 +8,7 @@ import { MainService } from './services/main.service';
 export class AppComponent implements OnInit {
   userDetails: any;
   selectedUserDetails: any;
-  userSuggetions: any;
+  userSuggetions = [];
   suggetionsArray = [];
   selectedUser = [
     {
@@ -74,6 +74,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
   }
   onSelectUser(i) {
+    let suggLen;
     console.log('selected user ID', i);
     this.dataObject.map(user => {
       if (user.id === i) {
@@ -81,9 +82,25 @@ export class AppComponent implements OnInit {
         this.mainService.setUserDetails(user);
         // this.userSuggetions = user.suggestions;
         this.suggetionsArray.push(user.suggestions);
-        console.log(this.suggetionsArray[0]);
+        console.log(this.suggetionsArray[0][1]);
+        suggLen = this.suggetionsArray[0].length;
       }
     });
+    // tslint:disable-next-line: prefer-for-of
+    for (let i=0;i< suggLen;i++){
+      // this.searchUser(this.suggetionsArray[0]);
+    }
 
   }
+  searchUser(id) {
+
+    this.userDetails.map((user) => {
+      if (user.id === id) {
+        this.userSuggetions.push(user);
+      }
+
+    });
+    console.log('userSuggetions', this.userSuggetions);
+  }
+
 }
